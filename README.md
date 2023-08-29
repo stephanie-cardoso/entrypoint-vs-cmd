@@ -23,7 +23,7 @@ Agora faça o seguinte. Rode novamente a imagem mas agora passando outro endere�
 
 Repare que nesse caso, o CMD é substituído pelo argumento passado no docker run.
 
-### Outra possibilidade
+### Somente ENTRYPOINT
 
 Outra opção é você criar uma imagem somente com o ENTRYPOINT, pois esse é o executável do seu container. Para simular com a imagem do repositório, faça os seguintes passos:
 
@@ -35,6 +35,19 @@ Repare que nesse caso, o comando não roda. Você receberá o erro `ping: usage 
 
 Você deve então rodar a imagem passando o endereço para o ping junto com o comando: `docker run ping google.com`
 
-## Conclusão
+### Somente CMD
 
-Não é que exista uma forma certa ou errada de utilizar o ENTRYPOINT com ou sem CMD. Você precisa avaliar o que faz sentido para o contexto da sua aplicação.
+Você pode também usar somente o CMD, não ter o ENTRYPOINT definido. No caso desse exemplo, você pode fazer:
+
+- Remova a linha 6 do ENTRYPOINT
+- Ajuste o CMD para rodar o comando e o argumento: `CMD [ "ping", "google.com" ]`
+
+Nesse caso, vai rodar da mesma forma.
+
+## Quando usar cada um?
+
+Não é que exista uma forma certa ou errada de utilizar o ENTRYPOINT com ou sem CMD, ou somente o ENTRYPOINT.
+
+Caso você queira "obrigar" que um comando seja executado no seu container, é recomendável usar o ENTRYPOINT. Pois o comando rodará com certeza (e os argumentos são opcionais).
+
+Avalie o que faz sentido para o contexto da sua aplicação e faça sua decisão!
